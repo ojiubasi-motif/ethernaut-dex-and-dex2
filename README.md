@@ -50,3 +50,33 @@ the protocol will completely be drained of one of the tokens of any liquidity pa
 
 ### Recommendation
 use ```safeMath``` library to carefully do the ```getSwapPrice```or manually *roundup* for tokens coming in and *rounddown* for tokens going out.
+
+
+
+## <font color="">DEX2 CHALLENGE<a id="dex2"></a></font>
+
+## High Risk Findings
+
+### H-01 ```Swap``` function doesn't verify if the token being sent by the ```msg.sender``` is a valid token. 
+
+***submitted by cryptedOji***
+
+### Relevant Github link
+
+
+### Summary
+
+Due to the absence of token verification in the ```swap``` function, any account can send random tokens that may be worthless to the protocol and in exchange drain the protocol of its token.
+
+### Vulnerability details
+let say there are two tokens ```token1``` and ```token2``` in the ```DEX``` protocol, each with 100units in the protocol. if I create two random tokens say ```myToken1``` and ```myToken1``` and call the ```swap``` function with as little as 1 unit of *myToken1* and *myToken2*, i will be able to swap out 100 units of both *token1* and *token2* from the protocol, just by performing the *swap* twice. the two swaps will be *mytoken1* for *token1* and *myToken2* for *token2*.
+
+
+### PoC
+[Here is the test](https://github.com/ojiubasi-motif/ethernaut-dex-and-dex2/blob/master/test/dex2.t.sol) for the exploit
+
+### Impact
+the protocol will completely be drained of any token listed on it.
+
+### Recommendation
+use ```require``` or a ```modifier``` to carefully verify and check the validity of the token that the ```msg.sender``` is sending during swap.
