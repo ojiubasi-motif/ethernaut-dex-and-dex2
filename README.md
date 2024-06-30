@@ -43,7 +43,7 @@ math for last swap
 so in the last swap if we put in 45 units of ```token2``` we can completely drain out the contract of ```token1```
 
 ### PoC
-[Here is the test]() for the exploit
+[Here is the test](https://github.com/ojiubasi-motif/ethernaut-dex-and-dex2/blob/master/test/dex.t.sol) for the exploit
 
 ### Impact
 the protocol will completely be drained of one of the tokens of any liquidity pair added to it.
